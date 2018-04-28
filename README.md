@@ -15,7 +15,7 @@ Educational purposes at the first place. I want to improve common development sk
 - Text view with scrolling
 - Text input
 - Platforms:
-   - Web
+   - Web (HTML+JS)
    - MacOS
    - Windows Classic
    - Android
@@ -25,7 +25,7 @@ Educational purposes at the first place. I want to improve common development sk
 
 - **Start** - called when app ready to use
 - **Write(string)** - write string to text view
-- **string Read()** - read string from input
+- **OnRead(string)** - string input callback
 
 ## TODO
 
