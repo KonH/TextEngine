@@ -27,5 +27,4 @@ document.addEventListener("DOMContentLoaded", () => {
 	let textInput = document.getElementById("textInput");
 	let submitButton = document.getElementById("submitButton");
 	let engine = new TextEngine(textView, textInput, submitButton);
-	engine.write("Test text\n");
 });
