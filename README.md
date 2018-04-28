@@ -30,7 +30,7 @@ Educational purposes at the first place. I want to improve common development sk
 ## TODO
 
 - [ ] Make foundation frontend apps:
-   - [ ] Web
+   - [x] Web
    - [ ] MacOS
    - [ ] Windows
    - [ ] Android
