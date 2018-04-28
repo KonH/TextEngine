@@ -19,7 +19,7 @@ Educational purposes at the first place. I want to improve common development sk
    - MacOS
    - Windows Classic
    - Android
-   - iOS
+   - iOS (Swift)
 
 ## Frontend interface
 
@@ -34,4 +34,4 @@ Educational purposes at the first place. I want to improve common development sk
    - [ ] MacOS
    - [ ] Windows
    - [ ] Android
-   - [ ] iOS
+   - [X] iOS
