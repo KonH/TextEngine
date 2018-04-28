@@ -16,7 +16,7 @@ Educational purposes at the first place. I want to improve common development sk
 - Text input
 - Platforms:
    - Web (HTML+JS)
-   - MacOS
+   - MacOS (Swift)
    - Windows Classic
    - Android
    - iOS (Swift)
@@ -31,7 +31,7 @@ Educational purposes at the first place. I want to improve common development sk
 
 - [ ] Make foundation frontend apps:
    - [x] Web
-   - [ ] MacOS
+   - [x] MacOS
    - [ ] Windows
    - [ ] Android
-   - [X] iOS
+   - [x] iOS
