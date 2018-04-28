@@ -15,6 +15,7 @@ Educational purposes at the first place. I want to improve common development sk
 - Text view with scrolling
 - Text input
 - Platforms:
+   - Web
    - MacOS
    - Windows Classic
    - Android
@@ -29,6 +30,7 @@ Educational purposes at the first place. I want to improve common development sk
 ## TODO
 
 - [ ] Make foundation frontend apps:
+   - [ ] Web
    - [ ] MacOS
    - [ ] Windows
    - [ ] Android
