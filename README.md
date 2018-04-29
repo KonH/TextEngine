@@ -36,3 +36,15 @@ Educational purposes at the first place. I want to improve common development sk
    - [x] Android
    - [x] iOS
 - [ ] Fix scrolling on iOS/Mac
+- [ ] User code usage?
+- [ ] Shared library usage:
+   - [ ] Web
+   - [ ] MacOS
+   - [ ] Windows
+   - [ ] Android
+   - [ ] iOS
+- [ ] Build pipeline:
+   - [ ] Pull foundation and copy to Staging
+   - [ ] Append latest library and user code
+   - [ ] Ready to build & run
+   - [ ] Full build process
