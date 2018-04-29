@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <ScrollViewer Margin="10,10,10,45">
+            <TextBlock Name="TextView" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch"/>
+        </ScrollViewer>
+        <TextBox Name="TextInput" HorizontalAlignment="Stretch" Height="25" Margin="10,0,95,10" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+        <Button Name="SubmitButton" Content="OK" Height="25" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="OnSubmitButtonClick"/>
     </Grid>
 </Window>

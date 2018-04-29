@@ -17,7 +17,7 @@ Educational purposes at the first place. I want to improve common development sk
 - Platforms:
    - Web (HTML+JS)
    - MacOS (Swift)
-   - Windows Classic
+   - Windows Classic (C#+WPF)
    - Android
    - iOS (Swift)
 
@@ -32,7 +32,7 @@ Educational purposes at the first place. I want to improve common development sk
 - [ ] Make foundation frontend apps:
    - [x] Web
    - [x] MacOS
-   - [ ] Windows
+   - [x] Windows
    - [ ] Android
    - [x] iOS
 - [ ] Fix scrolling on iOS/Mac

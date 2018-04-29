@@ -1,17 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WindowsClassic {
 	/// <summary>
@@ -20,6 +8,22 @@ namespace WindowsClassic {
 	public partial class MainWindow : Window {
 		public MainWindow() {
 			InitializeComponent();
+			TextEngine.Instance.OnStart();
+			TextEngine.Instance.OnWrite += OnWrite;
+		}
+
+		protected override void OnClosed(EventArgs e) {
+			TextEngine.Instance.OnWrite -= OnWrite;
+		}
+
+		void OnSubmitButtonClick(object sender, RoutedEventArgs e) {
+			var text = TextInput.Text;
+			TextEngine.Instance.OnRead(text);
+			TextInput.Clear();
+		}
+
+		void OnWrite(string msg) {
+			TextView.Text += msg;
 		}
 	}
 }
