@@ -15,23 +15,24 @@ Educational purposes at the first place. I want to improve common development sk
 - Text view with scrolling
 - Text input
 - Platforms:
-   - Web
-   - MacOS
-   - Windows Classic
-   - Android
-   - iOS
+   - Web (HTML+JS)
+   - MacOS (Swift)
+   - Windows Classic (C#+WPF)
+   - Android (Kotlin)
+   - iOS (Swift)
 
 ## Frontend interface
 
 - **Start** - called when app ready to use
 - **Write(string)** - write string to text view
-- **string Read()** - read string from input
+- **OnRead(string)** - string input callback
 
 ## TODO
 
 - [ ] Make foundation frontend apps:
-   - [ ] Web
-   - [ ] MacOS
-   - [ ] Windows
-   - [ ] Android
-   - [ ] iOS
+   - [x] Web
+   - [x] MacOS
+   - [x] Windows
+   - [x] Android
+   - [x] iOS
+- [ ] Fix scrolling on iOS/Mac
