@@ -35,3 +35,4 @@ Educational purposes at the first place. I want to improve common development sk
    - [ ] Windows
    - [ ] Android
    - [x] iOS
+- [ ] Fix scrolling on iOS/Mac
