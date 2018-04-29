@@ -2,16 +2,31 @@ package com.textengine.android
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    private val onWriteCallback: (String)->Unit = {m -> onWrite(m)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Example of a call to a native method
-        sample_text.text = stringFromJNI()
+        // sample_text.text = stringFromJNI()
+
+        TextEngine.instance.init(onWriteCallback)
+        TextEngine.instance.onStart()
+    }
+
+    fun onSubmitButtonClick(view : View) {
+        val text = textInput.text.toString()
+        TextEngine.instance.onRead(text)
+        textInput.setText("")
+    }
+
+    private fun onWrite(msg : String) {
+        textView.append(msg)
     }
 
     /**

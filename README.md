@@ -18,7 +18,7 @@ Educational purposes at the first place. I want to improve common development sk
    - Web (HTML+JS)
    - MacOS (Swift)
    - Windows Classic (C#+WPF)
-   - Android
+   - Android (Kotlin)
    - iOS (Swift)
 
 ## Frontend interface
@@ -33,6 +33,6 @@ Educational purposes at the first place. I want to improve common development sk
    - [x] Web
    - [x] MacOS
    - [x] Windows
-   - [ ] Android
+   - [x] Android
    - [x] iOS
 - [ ] Fix scrolling on iOS/Mac
