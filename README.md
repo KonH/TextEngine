@@ -14,6 +14,8 @@ Educational purposes at the first place. I want to improve common development sk
 - Frontend on platform-friendly languages
 - Text view with scrolling
 - Text input
+- Toolchain:
+   - EngineBuilder (C#+.NET Core)
 - Platforms:
    - Web (HTML+JS)
    - MacOS (Swift)
@@ -45,7 +47,8 @@ Educational purposes at the first place. I want to improve common development sk
    - [ ] Android
    - [ ] iOS
 - [ ] Build pipeline:
-   - [ ] Pull foundation and copy to Staging
+   - [x] Pull foundation and copy to Staging
    - [ ] Append latest library and user code
    - [ ] Ready to build & run
+   - [ ] Perform build and place it to Builds
    - [ ] Full build process

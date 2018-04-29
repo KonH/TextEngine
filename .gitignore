@@ -16,3 +16,6 @@ Foundation/WindowsClassic/Debug/
 Foundation/WindowsClassic/TextEngineLibrary/Debug/
 Temp/
 Staging/
+EngineBuilder/.vs/
+EngineBuilder/bin/
+EngineBuilder/obj/
