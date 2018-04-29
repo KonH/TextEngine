@@ -7,18 +7,22 @@ namespace WindowsClassic {
 
 		public event Action<string> OnWrite = new Action<string>((_) => { });
 
-		public void Write(string msg) {
-			Debug.Write($"TextEngine.Write: '{msg}'");
-			OnWrite(msg);
+		public void Init() {
+			TextEngineNative.Instance.Init(OnWrite, OnDebug);
+		}
+
+		void OnDebug(string msg) {
+			Debug.WriteLine(msg);
 		}
 
 		public void OnStart() {
 			Debug.Write("TextEngine.OnStart");
+			TextEngineNative.Instance.OnStart();
 		}
 
 		public void OnRead(string msg) {
 			Debug.Write($"TextEngine.OnRead: '{msg}'");
-			Write($"You entered: '{msg}'\n");
+			TextEngineNative.Instance.OnRead(msg);
 		}
 	}
 }

@@ -8,8 +8,9 @@ namespace WindowsClassic {
 	public partial class MainWindow : Window {
 		public MainWindow() {
 			InitializeComponent();
-			TextEngine.Instance.OnStart();
 			TextEngine.Instance.OnWrite += OnWrite;
+			TextEngine.Instance.Init();
+			TextEngine.Instance.OnStart();
 		}
 
 		protected override void OnClosed(EventArgs e) {

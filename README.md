@@ -36,12 +36,12 @@ Educational purposes at the first place. I want to improve common development sk
    - [x] Android
    - [x] iOS
 - [ ] Fix scrolling on iOS/Mac
-- [ ] User code usage?
+- [x] User code usage?
 - [ ] Shared library usage:
-   - [ ] Debug handlers
+   - [x] Debug handlers
    - [ ] Web
    - [ ] MacOS
-   - [ ] Windows
+   - [x] Windows
    - [ ] Android
    - [ ] iOS
 - [ ] Build pipeline:
