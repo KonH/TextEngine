@@ -11,6 +11,7 @@ namespace EngineBuilder {
 			public string ToolsVersion               { get; } = "15.0";
 			public string MSBuildPath                { get; } = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe";
 			public string BuildDirectory             { get; }
+			public string BuildFile                  { get; } = "WindowsClassic.exe";
 
 			public Dictionary<string, string> ProjectProperties { get; } = new Dictionary<string, string> {
 				{ "VCTargetsPath", @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets" }

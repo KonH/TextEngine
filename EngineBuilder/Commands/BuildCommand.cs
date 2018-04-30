@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-using System.Diagnostics;
 using EngineBuilder.Tools;
 
 namespace EngineBuilder.Commands {
@@ -77,15 +76,9 @@ namespace EngineBuilder.Commands {
 				);
 
 				var processArgs = GetLibraryProcessArgs(config, configurationName, platform);
-				Console.WriteLine($"Run '{msBuildPath}' with args: '{processArgs}'");
-				var proc = Process.Start(msBuildPath, processArgs);
-				proc.WaitForExit();
-
-				Console.WriteLine($"Process exited with code '{proc.ExitCode}'");
-				var isSuccess = proc.ExitCode == 0;
-				if ( !isSuccess ) {
-					throw new InvalidCommandException("Build process failed");
-				}
+				ProcessTools.RunProcessAndEnsureSuccess(
+					$"Build ('{configurationName}', '{platform}')", msBuildPath, processArgs
+				);
 			}
 		}
 
@@ -96,15 +89,9 @@ namespace EngineBuilder.Commands {
 			);
 
 			var processArgs = GetFrontendProcessArgs(config, configurationName);
-			Console.WriteLine($"Run '{msBuildPath}' with args: '{processArgs}'");
-			var proc = Process.Start(msBuildPath, processArgs);
-			proc.WaitForExit();
-
-			Console.WriteLine($"Process exited with code '{proc.ExitCode}'");
-			var isSuccess = proc.ExitCode == 0;
-			if ( !isSuccess ) {
-				throw new InvalidCommandException("Build process failed");
-			}
+			ProcessTools.RunProcessAndEnsureSuccess(
+				$"Build ('{configurationName}')", msBuildPath, processArgs
+			);
 		}
 
 		void CopyBuildResult(Configuration config, string target, string configurationName) {
