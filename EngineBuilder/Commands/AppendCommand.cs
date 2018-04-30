@@ -46,7 +46,7 @@ namespace EngineBuilder.Commands {
 				project = new Project(
 					vsProjectFile, windowsConfig.ProjectProperties, windowsConfig.ToolsVersion
 				);
-			} catch ( Exception e ) {
+			} catch {
 				Console.WriteLine("Failed to load project file, try to check WindowsConfiguration " +
 					"(tools version, project properties).");
 				throw;
