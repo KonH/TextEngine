@@ -8,6 +8,7 @@ namespace EngineBuilder {
 			{ "clean",   new CleanCommand  () },
 			{ "prepare", new PrepareCommand() },
 			{ "append",  new AppendCommand () },
+			{ "build",   new BuildCommand() }
 		};
 
 		public Configuration Config      { get; }
