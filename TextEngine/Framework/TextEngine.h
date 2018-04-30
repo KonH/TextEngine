@@ -8,13 +8,13 @@ typedef void(*DebugCallback)(const char*);
 extern "C" {
 	
 	// Called from frontend code to initialize all required callbacks
-	void TextEngine_Init(WriteCallback writeCallback, DebugCallback debugCallback);
+	void _declspec(dllexport) TextEngine_Init(WriteCallback writeCallback, DebugCallback debugCallback);
 	
 	// Called from frontend code when it is ready
-	void TextEngine_OnStart();
+	void _declspec(dllexport) TextEngine_OnStart();
 	
 	// Called from frontend code on user input
-	void TextEngine_OnRead(const char* msg);
+	void _declspec(dllexport) TextEngine_OnRead(const char* msg);
 }
 
 // Called by user library, forwarded to frontend
