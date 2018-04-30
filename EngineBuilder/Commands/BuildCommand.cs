@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System;
+using EngineBuilder.Tools;
 
 namespace EngineBuilder.Commands {
 	class BuildCommand : ICommand {
@@ -22,24 +24,43 @@ namespace EngineBuilder.Commands {
 				throw new InvalidCommandException("No platforms specified");
 			}
 
-			RunBuildFor(config, configurationName, platforms);
+			RunLibraryBuildFor(config, configurationName, platforms);
+			RunFrontendBuildFor(config, configurationName);
+
+			CopyBuildResult(config, target, configurationName);
 		}
 
-		string GetProcessArgs(Configuration config, string configurationName, string platform) {
-			var winConfig = config.Windows;
-			
-			var task         = "build";
-			var toolsVersion = winConfig.ToolsVersion;
-			var projFile     = winConfig.EngineLibraryVsProjectFile;
-
+		string GetCommonProperties(Configuration.WindowsConfiguration winConfig, string configurationName) {
 			var properties = "";
 			foreach ( var p in winConfig.ProjectProperties ) {
 				properties = AddProperty(p.Key, p.Value, properties);
 			}
 			properties = AddProperty("Configuration", configurationName, properties);
-			properties = AddProperty("Platform", platform, properties);
+			return properties;
+		}
 
-			var processArgs = $"/t:{task} {properties} /toolsversion:{toolsVersion} {projFile}";
+		string GetProcessArgs(Configuration config, string properties, string projectFile) {
+			var winConfig    = config.Windows;
+			var task         = "build";
+			var toolsVersion = winConfig.ToolsVersion;
+			var processArgs  = $"/t:{task} {properties} /toolsversion:{toolsVersion} {projectFile}";
+			return processArgs;
+		}
+
+		string GetLibraryProcessArgs(Configuration config, string configurationName, string platform) {
+			var winConfig   = config.Windows;
+			var properties  = GetCommonProperties(winConfig, configurationName);
+			properties      = AddProperty("Platform", platform, properties);
+			var projFile    = winConfig.EngineLibraryVsProjectFile;
+			var processArgs = GetProcessArgs(config, properties, projFile);
+			return processArgs;
+		}
+
+		string GetFrontendProcessArgs(Configuration config, string configurationName) {
+			var winConfig   = config.Windows;
+			var properties  = GetCommonProperties(winConfig, configurationName);
+			var projFile    = winConfig.FrontendVsProjectFile;
+			var processArgs = GetProcessArgs(config, properties, projFile);
 			return processArgs;
 		}
 
@@ -47,7 +68,7 @@ namespace EngineBuilder.Commands {
 			return line += $"/property:{name}=\"{value}\" ";
 		}
 
-		void RunBuildFor(Configuration config, string configurationName, List<string> platforms) {
+		void RunLibraryBuildFor(Configuration config, string configurationName, List<string> platforms) {
 			var msBuildPath = config.Windows.MSBuildPath;
 
 			foreach ( var platform in platforms ) {
@@ -55,7 +76,7 @@ namespace EngineBuilder.Commands {
 					$"Perform library project build for '{platform}' (configuration: '{configurationName}')"
 				);
 
-				var processArgs = GetProcessArgs(config, configurationName, platform);
+				var processArgs = GetLibraryProcessArgs(config, configurationName, platform);
 				Console.WriteLine($"Run '{msBuildPath}' with args: '{processArgs}'");
 				var proc = Process.Start(msBuildPath, processArgs);
 				proc.WaitForExit();
@@ -66,6 +87,30 @@ namespace EngineBuilder.Commands {
 					throw new InvalidCommandException("Build process failed");
 				}
 			}
+		}
+
+		void RunFrontendBuildFor(Configuration config, string configurationName) {
+			var msBuildPath = config.Windows.MSBuildPath;
+			Console.WriteLine(
+				$"Perform frontend project build (configuration: '{configurationName}')"
+			);
+
+			var processArgs = GetFrontendProcessArgs(config, configurationName);
+			Console.WriteLine($"Run '{msBuildPath}' with args: '{processArgs}'");
+			var proc = Process.Start(msBuildPath, processArgs);
+			proc.WaitForExit();
+
+			Console.WriteLine($"Process exited with code '{proc.ExitCode}'");
+			var isSuccess = proc.ExitCode == 0;
+			if ( !isSuccess ) {
+				throw new InvalidCommandException("Build process failed");
+			}
+		}
+
+		void CopyBuildResult(Configuration config, string target, string configurationName) {
+			var buildDir = Path.Combine(config.Windows.BuildDirectory, configurationName);
+			var outputDir = Path.Combine(config.BuildsDirectory, target);
+			IOTools.CopyDirectory(buildDir, outputDir);
 		}
 	}
 }
