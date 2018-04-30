@@ -12,40 +12,47 @@ namespace EngineBuilder {
 			{ "run",     new RunCommand()     },
 		};
 
-		public Configuration Config      { get; }
-		public string        CommandName { get; }
-		public List<string>  CommandArgs { get; }
+		public Configuration    Config   { get; }
+		public List<string>     Commands { get; }
+		public CommandArguments Args     { get; }
 
-		public CommandRunner(Configuration config, string commandName, List<string> commandArgs) {
-			Config      = config;
-			CommandName = commandName;
-			CommandArgs = commandArgs;
+		public CommandRunner(Configuration config, List<string> commandName, CommandArguments commandArgs) {
+			Config   = config;
+			Commands = commandName;
+			Args     = commandArgs;
 		}
 
-		public int Run() {
-			if ( _commandsMap.TryGetValue(CommandName, out var cmdToRun) ) {
+		public int RunAll() {
+			foreach ( var commandName in Commands ) {
 				try {
-					cmdToRun.Run(Config, CommandArgs);
-					Console.WriteLine($"Command '{CommandName}' completed successfully.");
-					return 0;
-				} catch ( InvalidCommandException e) {
-					Console.WriteLine($"Command '{CommandName}' failed because: '{e.Message}'.");
-					Console.WriteLine("Check description:");
-					Console.WriteLine(cmdToRun.Description);
-					Console.WriteLine("Supported targets:");
+					RunCommand(commandName);
+				} catch ( InvalidCommandException e ) {
+					Console.WriteLine($"Command '{commandName}' failed because: '{e.Message}'.");
+					if ( e.Command != null ) {
+						Console.WriteLine("Check description:");
+						Console.WriteLine(e.Command.Description);
+						Console.WriteLine("Supported targets:");
+					}
 					foreach ( var t in Config.Targets ) {
 						Console.WriteLine($" - {t}");
 					}
 					return 1;
 				} catch ( Exception e ) {
-					Console.WriteLine($"Command '{CommandName}' failed unexpectedly because:");
+					Console.WriteLine($"Command '{commandName}' failed unexpectedly because:");
 					Console.WriteLine(e);
 					return 1;
 				}
-			} else {
-				Console.WriteLine($"Invalid command: '{CommandName}'!");
 			}
-			return 1;
+			return 0;
+		}
+
+		void RunCommand(string commandName) {
+			if ( _commandsMap.TryGetValue(commandName, out var cmdToRun) ) {
+				cmdToRun.Run(Config, Args);
+				Console.WriteLine($"Command '{commandName}' completed successfully.");
+			} else {
+				throw new InvalidCommandException(null, $"Invalid command: '{commandName}'!");
+			}
 		}
 	}
 }

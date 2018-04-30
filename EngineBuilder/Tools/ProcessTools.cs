@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using EngineBuilder.Commands;
 
 namespace EngineBuilder.Tools {
 	static class ProcessTools {
@@ -15,17 +16,19 @@ namespace EngineBuilder.Tools {
 			return proc;
 		}
 
-		public static void EnsureProcessSuccess(Process proc, string operationName) {
+		public static void EnsureProcessSuccess(ICommand command, Process proc, string operationName) {
 			Console.WriteLine($"Process {operationName} exited with code '{proc.ExitCode}'");
 			var isSuccess = proc.ExitCode == 0;
 			if ( !isSuccess ) {
-				throw new InvalidCommandException($"Process {operationName} failed");
+				throw new InvalidCommandException(command, $"Process {operationName} failed");
 			}
 		}
 		
-		public static void RunProcessAndEnsureSuccess(string operationName, string fileName, string args) {
+		public static void RunProcessAndEnsureSuccess(
+			ICommand command, string operationName, string fileName, string args
+		) {
 			var proc = RunProcessAndWait(fileName, args);
-			EnsureProcessSuccess(proc, operationName);
+			EnsureProcessSuccess(command, proc, operationName);
 		}
 	}
 }

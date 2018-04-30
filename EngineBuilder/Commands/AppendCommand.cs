@@ -1,19 +1,15 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using System.Collections.Generic;
 using EngineBuilder.Tools;
 using Microsoft.Build.Evaluation;
 
 namespace EngineBuilder.Commands {
 	class AppendCommand : ICommand {
 		public string Description { get; } =
-			"'append {target}' - integrate project files to starging directory";
+			"'append -target={target}' - integrate project files to starging directory";
 
-		public void Run(Configuration config, List<string> args) {
-			var target = args.FirstOrDefault();
-			CommandHelpers.EnsureTarget(config, target);
-
+		public void Run(Configuration config, CommandArguments args) {
+			var target           = args.GetTarget(this);
 			var projectTargetDir = CommonCopyProjectDirectory(config, target);
 			IntegrateProjectTargetSpecific(config, target, projectTargetDir);
 		}
@@ -23,7 +19,9 @@ namespace EngineBuilder.Commands {
 				IOTools.CopyDirectory(config.ProjectDirectory, projectTargetDir);
 				return projectTargetDir;
 			} else {
-				throw new InvalidCommandException($"Project target directory for target '{target}' isn't specified");
+				throw new InvalidCommandException(
+					this, $"Project target directory for target '{target}' isn't specified"
+				);
 			}
 		}
 

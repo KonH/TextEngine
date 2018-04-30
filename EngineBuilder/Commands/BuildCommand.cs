@@ -1,32 +1,23 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Collections.Generic;
 using EngineBuilder.Tools;
 
 namespace EngineBuilder.Commands {
 	class BuildCommand : ICommand {
 		public string Description { get; } =
-			"'build {target} {configuration} {platforms}' - perform build and place results in Builds directory";
+			"'build -target={target} -configuration={configuration} -platform={platform}'" +
+			" - perform build and place results in Builds directory " +
+			"(configuration: {Debug,Release}, platform (multiple): {x86,x64})";
 
-		public void Run(Configuration config, List<string> args) {
-			var target = args.FirstOrDefault();
-			CommandHelpers.EnsureTarget(config, target);
+		public void Run(Configuration config, CommandArguments args) {
+			var target            = args.GetTarget(this);
+			var configurationName = args.Get      (this, "configuration");
+			var platforms         = args.GetAll   (this, "platform");
 
-			var configurationName = args.Skip(1).FirstOrDefault();
-			if ( string.IsNullOrEmpty(configurationName) ) {
-				throw new InvalidCommandException("No configuration specified");
-			}
-
-			var platforms = args.Skip(2).ToList();
-			if ( platforms.Count == 0 ) {
-				throw new InvalidCommandException("No platforms specified");
-			}
-
-			RunLibraryBuildFor(config, configurationName, platforms);
+			RunLibraryBuildFor (config, configurationName, platforms);
 			RunFrontendBuildFor(config, configurationName);
-
-			CopyBuildResult(config, target, configurationName);
+			CopyBuildResult    (config, target, configurationName);
 		}
 
 		string GetCommonProperties(Configuration.WindowsConfiguration winConfig, string configurationName) {
@@ -67,7 +58,7 @@ namespace EngineBuilder.Commands {
 			return line += $"/property:{name}=\"{value}\" ";
 		}
 
-		void RunLibraryBuildFor(Configuration config, string configurationName, List<string> platforms) {
+		void RunLibraryBuildFor(Configuration config, string configurationName, ICollection<string> platforms) {
 			var msBuildPath = config.Windows.MSBuildPath;
 
 			foreach ( var platform in platforms ) {
@@ -77,7 +68,7 @@ namespace EngineBuilder.Commands {
 
 				var processArgs = GetLibraryProcessArgs(config, configurationName, platform);
 				ProcessTools.RunProcessAndEnsureSuccess(
-					$"Build ('{configurationName}', '{platform}')", msBuildPath, processArgs
+					this, $"Build ('{configurationName}', '{platform}')", msBuildPath, processArgs
 				);
 			}
 		}
@@ -90,7 +81,7 @@ namespace EngineBuilder.Commands {
 
 			var processArgs = GetFrontendProcessArgs(config, configurationName);
 			ProcessTools.RunProcessAndEnsureSuccess(
-				$"Build ('{configurationName}')", msBuildPath, processArgs
+				this, $"Build ('{configurationName}')", msBuildPath, processArgs
 			);
 		}
 

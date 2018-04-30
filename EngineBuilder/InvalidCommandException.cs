@@ -1,7 +1,12 @@
 ﻿using System;
+using EngineBuilder.Commands;
 
 namespace EngineBuilder {
 	class InvalidCommandException : Exception {
-		public InvalidCommandException(string message):base(message) { }
+		public ICommand Command { get; }
+
+		public InvalidCommandException(ICommand command, string message):base(message) {
+			Command = command;
+		}
 	}
 }
