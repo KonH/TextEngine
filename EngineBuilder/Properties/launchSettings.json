@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "EngineBuilder": {
+      "commandName": "Project",
+      "commandLineArgs": "append WindowsClassic",
+      "workingDirectory": "D:\\Work\\Programming\\Common\\TextEngine"
+    }
+  }
+}

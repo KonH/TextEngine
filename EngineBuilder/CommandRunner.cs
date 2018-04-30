@@ -6,7 +6,8 @@ namespace EngineBuilder {
 	class CommandRunner {
 		Dictionary<string, ICommand> _commandsMap = new Dictionary<string, ICommand> {
 			{ "clean",   new CleanCommand  () },
-			{ "prepare", new PrepareCommand() }
+			{ "prepare", new PrepareCommand() },
+			{ "append",  new AppendCommand () },
 		};
 
 		public Configuration Config      { get; }
