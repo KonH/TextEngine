@@ -40,9 +40,17 @@ namespace EngineBuilder.Commands {
 			var windowsConfig = config.Windows;
 			var vsProjectFile = windowsConfig.EngineLibraryVsProjectFile;
 			Console.WriteLine($"Modify project file: '{vsProjectFile}'");
-			var project = new Project(
-				vsProjectFile, windowsConfig.ProjectProperties, windowsConfig.ToolsVersion
-			);
+
+			Project project = null;
+			try {
+				project = new Project(
+					vsProjectFile, windowsConfig.ProjectProperties, windowsConfig.ToolsVersion
+				);
+			} catch ( Exception e ) {
+				Console.WriteLine("Failed to load project file, try to check WindowsConfiguration " +
+					"(tools version, project properties).");
+				throw;
+			}
 
 			var libDirectory = config.Windows.EngineLibraryDirectory;
 
