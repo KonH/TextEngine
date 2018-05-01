@@ -39,7 +39,9 @@ namespace EngineBuilder.Commands {
 		}
 
 		public string GetTarget(ICommand command) {
-			return Get(command, "target");
+			var target = Get(command, "target");
+			CommandHelpers.EnsureTarget(command, _config, target);
+			return target;
 		}
 
 		public void Add(string key, string value) {
