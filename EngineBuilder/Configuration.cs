@@ -17,21 +17,28 @@ namespace EngineBuilder {
 				{ "VCTargetsPath", @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets" }
 			};
 
-			public WindowsConfiguration(
-				string engineLibraryDirectory, string frontendDirectory, string buildDirectory
-			) {
-				EngineLibraryDirectory     = engineLibraryDirectory;
-				EngineLibraryVsProjectFile = Path.Combine(engineLibraryDirectory, "TextEngineLibrary.vcxproj");
-				FrontendDirectory          = frontendDirectory;
-				FrontendVsProjectFile      = Path.Combine(frontendDirectory, "WindowsClassic.csproj");
-				BuildDirectory             = buildDirectory;
+			public WindowsConfiguration(Configuration config) {
+				var stagingRoot     = Path.Combine(config.StagingDirectory, WindowsClassicTarget);
+				var frontendLibrary = Path.Combine(stagingRoot, "WindowsClassic");
+				var engineLibrary   = Path.Combine(stagingRoot, "TextEngineLibrary");
+
+				EngineLibraryVsProjectFile = Path.Combine(engineLibrary, "TextEngineLibrary.vcxproj");
+				FrontendVsProjectFile      = Path.Combine(frontendLibrary, "WindowsClassic.csproj");
+				BuildDirectory             = Path.Combine(frontendLibrary, "bin");
+
+				config.ProjectTargetDirectories.Add(
+					WindowsClassicTarget,
+					Path.Combine(engineLibrary, "TextEngine")
+				);
 			}
 		}
 
 		public const string WindowsClassicTarget = "WindowsClassic";
+		public const string AndroidTarget        = "Android";
 
 		public List<string> Targets { get; } = new List<string> {
-			WindowsClassicTarget
+			WindowsClassicTarget,
+			AndroidTarget,
 		};
 
 		public string ProjectDirectory    { get; } = "TextEngine";
@@ -44,15 +51,7 @@ namespace EngineBuilder {
 		public WindowsConfiguration Windows { get; }
 
 		public Configuration() {
-			var windowsStagingRoot     = Path.Combine(StagingDirectory, WindowsClassicTarget);
-			var windowsFrontendLibrary = Path.Combine(windowsStagingRoot, "WindowsClassic");
-			var windowsEngineLibrary   = Path.Combine(windowsStagingRoot, "TextEngineLibrary");
-			var buildDirectory         = Path.Combine(windowsFrontendLibrary, "bin");
-			ProjectTargetDirectories.Add(
-				WindowsClassicTarget, 
-				Path.Combine(windowsEngineLibrary, "TextEngine")
-			);
-			Windows = new WindowsConfiguration(windowsEngineLibrary, windowsFrontendLibrary, buildDirectory);
+			Windows = new WindowsConfiguration(this);
 		}
 	}
 }
