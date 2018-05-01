@@ -20,3 +20,4 @@ Builds/
 EngineBuilder/.vs/
 EngineBuilder/bin/
 EngineBuilder/obj/
+EngineBuilder/Properties/launchSettings.json

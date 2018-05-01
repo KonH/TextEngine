@@ -19,16 +19,33 @@ namespace EngineBuilder {
 
 			public WindowsConfiguration(Configuration config) {
 				var stagingRoot     = Path.Combine(config.StagingDirectory, WindowsClassicTarget);
-				var frontendLibrary = Path.Combine(stagingRoot, "WindowsClassic");
-				var engineLibrary   = Path.Combine(stagingRoot, "TextEngineLibrary");
 
-				EngineLibraryVsProjectFile = Path.Combine(engineLibrary, "TextEngineLibrary.vcxproj");
-				FrontendVsProjectFile      = Path.Combine(frontendLibrary, "WindowsClassic.csproj");
-				BuildDirectory             = Path.Combine(frontendLibrary, "bin");
+				EngineLibraryDirectory     = Path.Combine(stagingRoot, "TextEngineLibrary");
+				FrontendDirectory          = Path.Combine(stagingRoot, "WindowsClassic");
+				EngineLibraryVsProjectFile = Path.Combine(EngineLibraryDirectory, "TextEngineLibrary.vcxproj");
+				FrontendVsProjectFile      = Path.Combine(FrontendDirectory, "WindowsClassic.csproj");
+				BuildDirectory             = Path.Combine(FrontendDirectory, "bin");
 
 				config.ProjectTargetDirectories.Add(
 					WindowsClassicTarget,
-					Path.Combine(engineLibrary, "TextEngine")
+					Path.Combine(EngineLibraryDirectory, "TextEngine")
+				);
+			}
+		}
+
+		public class AndroidConfiguration {
+			public string BuildDirectory { get; }
+			public string BuildFile      { get; } = "app-debug.apk";
+			public string ApkRunName     { get; } = "apk-runner";
+			public string ApkRunCommand  { get; } = "{0}";
+
+			public AndroidConfiguration(Configuration config) {
+				var stagingRoot = Path.Combine(config.StagingDirectory, AndroidTarget);
+				BuildDirectory  = Path.Combine(stagingRoot, "app", "build", "outputs", "apk", "debug");
+
+				config.ProjectTargetDirectories.Add(
+					AndroidTarget,
+					Path.Combine(stagingRoot, "app", "src", "main", "cpp", "TextEngine")
 				);
 			}
 		}
@@ -49,9 +66,11 @@ namespace EngineBuilder {
 		public Dictionary<string, string> ProjectTargetDirectories { get; } = new Dictionary<string, string>();
 
 		public WindowsConfiguration Windows { get; }
+		public AndroidConfiguration Android { get; }
 
 		public Configuration() {
 			Windows = new WindowsConfiguration(this);
+			Android = new AndroidConfiguration(this);
 		}
 	}
 }

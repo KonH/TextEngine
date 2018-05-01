@@ -24,6 +24,7 @@ namespace EngineBuilder {
 
 		public int RunAll() {
 			foreach ( var commandName in Commands ) {
+				Console.WriteLine($"Starting command: '{commandName}'");
 				try {
 					RunCommand(commandName);
 				} catch ( InvalidCommandException e ) {
@@ -42,7 +43,9 @@ namespace EngineBuilder {
 					Console.WriteLine(e);
 					return 1;
 				}
+				Console.WriteLine();
 			}
+			Console.WriteLine("All commands completed successfully.");
 			return 0;
 		}
 
