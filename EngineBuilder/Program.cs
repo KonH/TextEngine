@@ -1,4 +1,5 @@
 ﻿using System;
+using EngineBuilder.Commands;
 
 namespace EngineBuilder {
 	class Program {
@@ -6,6 +7,7 @@ namespace EngineBuilder {
 			Console.WriteLine($"Starting with arguments: '{string.Join("; ", args)}'");
 			Console.WriteLine();
 
+			var commandFactory = new CommandFactory();
 			var config = new Configuration();
 			var parser = new ArgumentParser(config);
 			parser.Parse(args);
@@ -13,7 +15,7 @@ namespace EngineBuilder {
 				Console.WriteLine($"Execute commands: '{string.Join("; ", parser.Commands)}'");
 				Console.WriteLine();
 
-				var runner = new CommandRunner(config, parser.Commands, parser.Arguments);
+				var runner = new CommandRunner(commandFactory, config, parser.Commands, parser.Arguments);
 				runner.RunAll();
 			} else {
 				Console.WriteLine($"No command provided!");

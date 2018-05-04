@@ -4,19 +4,15 @@ using EngineBuilder.Commands;
 
 namespace EngineBuilder {
 	class CommandRunner {
-		Dictionary<string, ICommand> _commandsMap = new Dictionary<string, ICommand> {
-			{ "clean",   new CleanCommand  () },
-			{ "prepare", new PrepareCommand() },
-			{ "append",  new AppendCommand () },
-			{ "build",   new BuildCommand()   },
-			{ "run",     new RunCommand()     },
-		};
-
 		public Configuration    Config   { get; }
 		public List<string>     Commands { get; }
 		public CommandArguments Args     { get; }
 
-		public CommandRunner(Configuration config, List<string> commandName, CommandArguments commandArgs) {
+		readonly CommandFactory _commandFactory;
+
+		public CommandRunner(CommandFactory commandFactory, Configuration config, List<string> commandName, CommandArguments commandArgs) {
+			_commandFactory = commandFactory;
+
 			Config   = config;
 			Commands = commandName;
 			Args     = commandArgs;
@@ -26,7 +22,7 @@ namespace EngineBuilder {
 			foreach ( var commandName in Commands ) {
 				Console.WriteLine($"Starting command: '{commandName}'");
 				try {
-					RunCommand(commandName);
+					RunCommand(commandName, Args.GetTarget(null));
 				} catch ( InvalidCommandException e ) {
 					Console.WriteLine($"Command '{commandName}' failed because: '{e.Message}'.");
 					if ( e.Command != null ) {
@@ -49,13 +45,13 @@ namespace EngineBuilder {
 			return 0;
 		}
 
-		void RunCommand(string commandName) {
-			if ( _commandsMap.TryGetValue(commandName, out var cmdToRun) ) {
-				cmdToRun.Run(Config, Args);
-				Console.WriteLine($"Command '{commandName}' completed successfully.");
-			} else {
+		void RunCommand(string commandName, string target) {
+			var cmdToRun = _commandFactory.GetCommand(commandName, target);
+			if ( cmdToRun == null ) {
 				throw new InvalidCommandException(null, $"Invalid command: '{commandName}'!");
 			}
+			cmdToRun.Run(Config, Args);
+			Console.WriteLine($"Command '{commandName}' completed successfully.");
 		}
 	}
 }

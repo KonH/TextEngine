@@ -4,21 +4,15 @@ using System.Collections.Generic;
 using EngineBuilder.Tools;
 
 namespace EngineBuilder.Commands.WindowsClassic {
-	class BuildCommand_WindowsClassic : ICommand {
-		BuildCommand _owner;
+	class BuildCommand_WindowsClassic : BuildCommand {
+		
+		public override void Run(Configuration config, CommandArguments args) {
+			base.Run(config, args);
 
-		public string Description => _owner.Description;
+			var target            = args.GetTarget(this);
+			var configurationName = args.Get(this, "configuration");
+			var platforms         = args.GetAll(this, "platform");
 
-		public BuildCommand_WindowsClassic(BuildCommand owner) {
-			_owner = owner;
-		}
-
-		public void Run(Configuration config, CommandArguments args) {
-			_owner.Run(config, args);
-		}
-
-		public void Run(string target, string configurationName, Configuration config, CommandArguments args) {
-			var platforms = args.GetAll(this, "platform");
 			RunLibraryBuildFor (config, configurationName, platforms);
 			RunFrontendBuildFor(config, configurationName);
 			CopyBuildResult    (config, target, configurationName);

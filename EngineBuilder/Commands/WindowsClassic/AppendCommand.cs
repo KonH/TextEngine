@@ -3,17 +3,11 @@ using System.IO;
 using Microsoft.Build.Evaluation;
 
 namespace EngineBuilder.Commands.WindowsClassic {
-	class AppendCommand_WindowsClassic : ICommand {
-		AppendCommand _owner;
+	class AppendCommand_WindowsClassic : AppendCommand {
 
-		public string Description => _owner.Description;
-
-		public AppendCommand_WindowsClassic(AppendCommand owner) {
-			_owner = owner;
-		}
-
-		public void Run(Configuration config, CommandArguments args) {
-			_owner.Run(config, args);
+		public override void Run(Configuration config, CommandArguments args) {
+			base.Run(config, args);
+			InterateWindowsClassicProject(config, GetProjectTargetDirectory(config, args.GetTarget(this)));
 		}
 
 		public void InterateWindowsClassicProject(Configuration config, string projectTargetDir) {
