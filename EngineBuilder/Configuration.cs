@@ -68,14 +68,27 @@ namespace EngineBuilder {
 			}
 		}
 
+		public class MacOSConfiguration {
+			public MacOSConfiguration(Configuration config) {
+				var stagingRoot = Path.Combine(config.StagingDirectory, MacOSTarget);
+
+				config.ProjectTargetDirectories.Add(
+					MacOSTarget,
+					Path.Combine(stagingRoot, "MacOS", "TextEngine")
+				);
+			}
+		}
+
 		public const string WindowsClassicTarget = "WindowsClassic";
 		public const string AndroidTarget        = "Android";
 		public const string iOSTarget            = "iOS";
+		public const string MacOSTarget          = "MacOS";
 
 		public List<string> Targets { get; } = new List<string> {
 			WindowsClassicTarget,
 			AndroidTarget,
 			iOSTarget,
+			MacOSTarget,
 		};
 
 		public string ProjectDirectory    { get; } = "TextEngine";
@@ -88,11 +101,13 @@ namespace EngineBuilder {
 		public WindowsConfiguration Windows { get; }
 		public AndroidConfiguration Android { get; }
 		public iOSConfiguration     iOS     { get; }
+		public MacOSConfiguration   MacOS   { get; }
 
 		public Configuration() {
 			Windows = new WindowsConfiguration(this);
 			Android = new AndroidConfiguration(this);
 			iOS     = new iOSConfiguration    (this);
+			MacOS   = new MacOSConfiguration  (this);
 		}
 	}
 }
