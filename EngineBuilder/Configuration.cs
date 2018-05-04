@@ -34,18 +34,25 @@ namespace EngineBuilder {
 		}
 
 		public class AndroidConfiguration {
-			public string BuildDirectory { get; }
-			public string BuildFile      { get; } = "app-debug.apk";
-			public string ApkRunName     { get; } = "apk-runner";
-			public string ApkRunCommand  { get; } = "{0}";
+			public string AppDirectory    { get; }
+			public string BuildDirectory  { get; }
+			public string BuildFile       { get; } = "app-debug.apk";
+			public string ApkRunName      { get; } = "apk-runner";
+			public string ApkRunCommand   { get; } = "{0}";
+			public string CMakeVersion    { get; } = "3.4.1";
+			public string CMakeFile       { get; }
+			public string CppAppDirectory { get; }
 
 			public AndroidConfiguration(Configuration config) {
 				var stagingRoot = Path.Combine(config.StagingDirectory, AndroidTarget);
-				BuildDirectory  = Path.Combine(stagingRoot, "app", "build", "outputs", "apk", "debug");
+				AppDirectory    = Path.Combine(stagingRoot, "app");
+				BuildDirectory  = Path.Combine(AppDirectory, "build", "outputs", "apk", "debug");
+				CMakeFile       = Path.Combine(AppDirectory, "CMakeLists.txt");
+				CppAppDirectory = Path.Combine(AppDirectory, "src", "main", "cpp");
 
 				config.ProjectTargetDirectories.Add(
 					AndroidTarget,
-					Path.Combine(stagingRoot, "app", "src", "main", "cpp", "TextEngine")
+					Path.Combine(CppAppDirectory, "TextEngine")
 				);
 			}
 		}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using EngineBuilder.Commands.Android;
 using EngineBuilder.Commands.WindowsClassic;
 
 namespace EngineBuilder.Commands {
@@ -17,6 +18,7 @@ namespace EngineBuilder.Commands {
 
 		public CommandFactory() {
 			AddSpecificCommand<AppendCommand>(Configuration.WindowsClassicTarget, new AppendCommand_WindowsClassic());
+			AddSpecificCommand<AppendCommand>(Configuration.AndroidTarget,        new AppendCommand_Android());
 			AddSpecificCommand<BuildCommand> (Configuration.WindowsClassicTarget, new BuildCommand_WindowsClassic());
 		}
 
