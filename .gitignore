@@ -21,3 +21,5 @@ EngineBuilder/.vs/
 EngineBuilder/bin/
 EngineBuilder/obj/
 EngineBuilder/Properties/launchSettings.json
+XcodeApi/bin/
+XcodeApi/obj/

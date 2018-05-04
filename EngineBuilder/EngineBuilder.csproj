@@ -23,4 +23,7 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\XcodeApi\XcodeApi.csproj" />
+  </ItemGroup>
 </Project>
