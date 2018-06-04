@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EngineBuilder.Commands.Android;
 using EngineBuilder.Commands.WindowsClassic;
+using EngineBuilder.Commands.MacOS;
 
 namespace EngineBuilder.Commands {
 	class CommandFactory {
@@ -19,6 +20,7 @@ namespace EngineBuilder.Commands {
 		public CommandFactory() {
 			AddSpecificCommand<AppendCommand>(Configuration.WindowsClassicTarget, new AppendCommand_WindowsClassic());
 			AddSpecificCommand<AppendCommand>(Configuration.AndroidTarget,        new AppendCommand_Android());
+			AddSpecificCommand<AppendCommand>(Configuration.MacOSTarget,          new AppendCommand_MacOS());
 			AddSpecificCommand<BuildCommand> (Configuration.WindowsClassicTarget, new BuildCommand_WindowsClassic());
 			AddSpecificCommand<BuildCommand> (Configuration.AndroidTarget,        new BuildCommand_Android());
 		}

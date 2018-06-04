@@ -1,4 +1,7 @@
-﻿using EngineBuilder.Tools;
+﻿using System.IO;
+using System.Linq;
+using System.Collections.Generic;
+using EngineBuilder.Tools;
 
 namespace EngineBuilder.Commands {
 	class AppendCommand : ICommand {
@@ -22,6 +25,14 @@ namespace EngineBuilder.Commands {
 
 		void CommonCopyProjectDirectory(Configuration config, string target) {
 			IOTools.CopyDirectory(config.ProjectDirectory, GetProjectTargetDirectory(config, target));
+		}
+
+		protected List<string> GetFilesToAdd(string relativeTo, string path) {
+			return
+				Directory.GetFiles(path, "*.cpp", SearchOption.AllDirectories).
+				Select(p => Path.GetRelativePath(relativeTo, p)).
+				Select(p => p.Replace('\\', '/')).
+				ToList();
 		}
 	}
 }

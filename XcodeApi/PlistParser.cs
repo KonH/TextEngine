@@ -190,8 +190,10 @@ namespace UnityEditor.iOS.Xcode.Custom
         internal static XDocument ParseXmlNoDtd(string text)
         {
             XmlReaderSettings settings = new XmlReaderSettings();
-            settings.ProhibitDtd = false;
-            settings.XmlResolver = null; // prevent DTD download
+		#pragma warning disable CS0618 // Type or member is obsolete
+			settings.ProhibitDtd = false;
+		#pragma warning restore CS0618 // Type or member is obsolete
+			settings.XmlResolver = null; // prevent DTD download
 
             XmlReader xmlReader = XmlReader.Create(new StringReader(text), settings);
             return XDocument.Load(xmlReader);

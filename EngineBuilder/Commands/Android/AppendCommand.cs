@@ -1,7 +1,5 @@
-﻿using System.IO;
-using System.Linq;
-using System.Collections.Generic;
-using System;
+﻿using System;
+using System.IO;
 
 namespace EngineBuilder.Commands.Android {
 	class AppendCommand_Android : AppendCommand {
@@ -9,14 +7,6 @@ namespace EngineBuilder.Commands.Android {
 			base.Run(config, args);
 
 			InterateAndroidProject(config.Android);
-		}
-
-		List<string> GetFilesToAdd(string relativeTo, string path) {
-			return 
-				Directory.GetFiles(path, "*.cpp", SearchOption.AllDirectories).
-				Select(p => Path.GetRelativePath(relativeTo, p)).
-				Select(p => p.Replace('\\', '/')).
-				ToList();
 		}
 
 		void InterateAndroidProject(Configuration.AndroidConfiguration config) {

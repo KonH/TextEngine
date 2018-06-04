@@ -69,8 +69,15 @@ namespace EngineBuilder {
 		}
 
 		public class MacOSConfiguration {
+			public string AppDirectory { get; }
+			public string ProjectFile  { get; } = "MacOS.xcodeproj";
+			public string ProjectPath  { get; }
+			public string TargetName   { get; } = "MacOS";
+
 			public MacOSConfiguration(Configuration config) {
 				var stagingRoot = Path.Combine(config.StagingDirectory, MacOSTarget);
+				AppDirectory    = stagingRoot;
+				ProjectPath     = Path.Combine(stagingRoot, ProjectFile, "project.pbxproj");
 
 				config.ProjectTargetDirectories.Add(
 					MacOSTarget,
