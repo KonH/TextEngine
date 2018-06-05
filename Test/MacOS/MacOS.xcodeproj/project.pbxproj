@@ -13,6 +13,7 @@
 		7C139D452094F6B80013591F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C139D432094F6B80013591F /* Main.storyboard */; };
 		7C3B2FF320C62C610075916B /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B2FEF20C62C610075916B /* App.cpp */; };
 		7C3B2FF420C62C610075916B /* TextEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B2FF120C62C610075916B /* TextEngine.cpp */; };
+		7CBF8A1020C6520800F3B50B /* TextEngineWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7CBF8A0F20C6520800F3B50B /* TextEngineWrapper.mm */; };
 		7CC051322094FA18007B0CAA /* TextEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC051312094FA18007B0CAA /* TextEngine.swift */; };
 /* End PBXBuildFile section */
 
@@ -24,12 +25,14 @@
 		7C139D442094F6B80013591F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7C139D462094F6B80013591F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C139D472094F6B80013591F /* MacOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacOS.entitlements; sourceTree = "<group>"; };
-		7C3B2FEE20C62C610075916B /* App.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = App.hpp; sourceTree = "<group>"; };
+		7C3B2FEE20C62C610075916B /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		7C3B2FEF20C62C610075916B /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		7C3B2FF120C62C610075916B /* TextEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextEngine.cpp; sourceTree = "<group>"; };
-		7C3B2FF220C62C610075916B /* TextEngine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextEngine.hpp; sourceTree = "<group>"; };
+		7C3B2FF220C62C610075916B /* TextEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextEngine.h; sourceTree = "<group>"; };
 		7C3B2FF520C6327D0075916B /* MacOS-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MacOS-Bridging-Header.h"; sourceTree = "<group>"; };
-		7C3B2FF620C638880075916B /* TextEngine.Bridge.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextEngine.Bridge.hpp; sourceTree = "<group>"; };
+		7C3B2FF620C638880075916B /* TextEngine.Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextEngine.Bridge.h; sourceTree = "<group>"; };
+		7CBF8A0E20C651C100F3B50B /* TextEngineWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextEngineWrapper.h; sourceTree = "<group>"; };
+		7CBF8A0F20C6520800F3B50B /* TextEngineWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TextEngineWrapper.mm; sourceTree = "<group>"; };
 		7CC051312094FA18007B0CAA /* TextEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +75,8 @@
 				7C139D462094F6B80013591F /* Info.plist */,
 				7C139D472094F6B80013591F /* MacOS.entitlements */,
 				7C3B2FEC20C62C610075916B /* TextEngine */,
+				7CBF8A0E20C651C100F3B50B /* TextEngineWrapper.h */,
+				7CBF8A0F20C6520800F3B50B /* TextEngineWrapper.mm */,
 			);
 			path = MacOS;
 			sourceTree = "<group>";
@@ -88,7 +93,7 @@
 		7C3B2FED20C62C610075916B /* App */ = {
 			isa = PBXGroup;
 			children = (
-				7C3B2FEE20C62C610075916B /* App.hpp */,
+				7C3B2FEE20C62C610075916B /* App.h */,
 				7C3B2FEF20C62C610075916B /* App.cpp */,
 			);
 			path = App;
@@ -97,9 +102,9 @@
 		7C3B2FF020C62C610075916B /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				7C3B2FF620C638880075916B /* TextEngine.Bridge.hpp */,
+				7C3B2FF620C638880075916B /* TextEngine.Bridge.h */,
 				7C3B2FF120C62C610075916B /* TextEngine.cpp */,
-				7C3B2FF220C62C610075916B /* TextEngine.hpp */,
+				7C3B2FF220C62C610075916B /* TextEngine.h */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
@@ -131,7 +136,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = KonH;
 				TargetAttributes = {
 					7C139D392094F6B80013591F = {
@@ -176,8 +181,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C3B2FF420C62C610075916B /* TextEngine.cpp in Sources */,
-				7C139D402094F6B80013591F /* ViewController.swift in Sources */,
 				7C3B2FF320C62C610075916B /* App.cpp in Sources */,
+				7CBF8A1020C6520800F3B50B /* TextEngineWrapper.mm in Sources */,
+				7C139D402094F6B80013591F /* ViewController.swift in Sources */,
 				7CC051322094FA18007B0CAA /* TextEngine.swift in Sources */,
 				7C139D3E2094F6B80013591F /* AppDelegate.swift in Sources */,
 			);
@@ -211,6 +217,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -218,6 +225,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -268,6 +276,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -275,6 +284,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -311,13 +321,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = TU922RUWRN;
-				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
+				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = MacOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = TextEngine.MacOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "MacOS/MacOS-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
+				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
 		};
@@ -329,13 +342,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = TU922RUWRN;
-				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
+				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = MacOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = TextEngine.MacOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "MacOS/MacOS-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
+				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
 		};

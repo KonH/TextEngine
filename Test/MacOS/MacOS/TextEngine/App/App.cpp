@@ -1,7 +1,7 @@
 // temp
 #include <iostream>
 
-#include "App.hpp"
+#include "App.h"
 
 using namespace TextEngineApp;
 

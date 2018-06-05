@@ -1,7 +1,7 @@
 #include <memory>
 
-#include "TextEngine.hpp"
-#include "../App/App.hpp"
+#include "TextEngine.h"
+#include "../App/App.h"
 
 static std::unique_ptr<TextEngine::AppBase>   _appHandler(new TextEngineApp::App);
 static std::unique_ptr<TextEngine::Internals> _internals (new TextEngine::Internals);

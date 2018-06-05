@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Framework/TextEngine.hpp"
+#include "../Framework/TextEngine.h"
 
 namespace TextEngineApp {
 	class App : public TextEngine::AppBase {

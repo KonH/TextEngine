@@ -10,15 +10,33 @@ import Foundation
 
 class TextEngine {
     static let sharedInstance:TextEngine = TextEngine()
-    
     static let writeNotification = Notification.Name(rawValue:"TextEngine.WriteNotification")
-    
-    private init() {
-		TextEngine_Init({ (arg) in TextEngine.testWrite(arg: arg) }, { (arg) in TextEngine.testWrite(arg: arg) })
+	
+	let wrapper = TextEngineWrapper()
+	
+    func performInit() {
+		wrapper.performInit(
+			writeCallback:    { (arg) in TextEngine.write(arg: arg) },
+			andDebugCallback: { (arg) in TextEngine.debug(arg: arg) }
+		)
 	}
 	
-	static func testWrite(arg:Optional<UnsafePointer<Int8>>) {
-		// todo
+	static func write(arg:Optional<UnsafePointer<Int8>>) {
+		if let arg = arg {
+			let str = String(cString: arg)
+			sharedInstance.write(msg: str)
+		} else {
+			NSLog("Invalid write argument")
+		}
+	}
+	
+	static func debug(arg:Optional<UnsafePointer<Int8>>) {
+		if let arg = arg {
+			let str = String(cString: arg)
+			sharedInstance.debug(msg: str)
+		} else {
+			NSLog("Invalid debug argument")
+		}
 	}
 	
     func write(msg:String) {
@@ -35,12 +53,11 @@ class TextEngine {
         
     func onStart() {
         NSLog("TextEngine.onStart")
-		TextEngine_OnStart()
+		wrapper.onStart()
     }
         
     func onRead(msg:String) {
         NSLog("TextEngine.onRead: '%@'", msg)
-        //write(msg: "You entered: '" + msg + "'\n")
-		TextEngine_OnRead(msg)
+		wrapper.onRead(msg)
     }
 }
