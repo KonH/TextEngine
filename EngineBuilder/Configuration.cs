@@ -98,6 +98,8 @@ namespace EngineBuilder {
 		}
 
 		public class WebConfiguration {
+			public string EmccPath { get; } = @"D:\Work\Programming\Web\emsdk\emscripten\1.38.5\emcc.bat";
+
 			public WebConfiguration(Configuration config) {
 				var stagingRoot = Path.Combine(config.StagingDirectory, WebTarget);
 

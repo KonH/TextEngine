@@ -1,1 +1,1 @@
-./builder.sh clean prepare append -target=Web
+./builder.sh clean prepare append build -target=Web

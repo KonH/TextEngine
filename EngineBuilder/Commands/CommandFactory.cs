@@ -29,6 +29,7 @@ namespace EngineBuilder.Commands {
 			AddSpecificCommand<BuildCommand> (Configuration.WindowsClassicTarget, new BuildCommand_WindowsClassic());
 			AddSpecificCommand<BuildCommand> (Configuration.AndroidTarget,        new BuildCommand_Android());
 			AddSpecificCommand<BuildCommand> (Configuration.MacOSTarget,          new BuildCommand_MacOS());
+			AddSpecificCommand<BuildCommand> (Configuration.WebTarget,            new BuildCommand_Web());
 
 			AddSpecificCommand<RunCommand>(Configuration.WindowsClassicTarget, new RunCommand_WindowsClassic());
 			AddSpecificCommand<RunCommand>(Configuration.MacOSTarget,          new RunCommand_MacOS());
