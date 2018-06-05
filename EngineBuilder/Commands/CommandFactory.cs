@@ -25,6 +25,8 @@ namespace EngineBuilder.Commands {
 			AddSpecificCommand<BuildCommand> (Configuration.WindowsClassicTarget, new BuildCommand_WindowsClassic());
 			AddSpecificCommand<BuildCommand> (Configuration.AndroidTarget,        new BuildCommand_Android());
 			AddSpecificCommand<BuildCommand> (Configuration.MacOSTarget,          new BuildCommand_MacOS());
+
+			AddSpecificCommand<RunCommand>(Configuration.WindowsClassicTarget, new RunCommand_WindowsClassic());
 		}
 
 		void AddSpecificCommand<T>(string target, ICommand cmd) {
