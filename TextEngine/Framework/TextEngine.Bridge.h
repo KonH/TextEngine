@@ -13,10 +13,10 @@ typedef void(*WriteCallback)(const char*);
 typedef void(*DebugCallback)(const char*);
 
 // Called from frontend code to initialize all required callbacks
-void DLL_EXPORT TextEngine_Init(WriteCallback writeCallback, DebugCallback debugCallback);
+DLL_EXPORT void TextEngine_Init(WriteCallback writeCallback, DebugCallback debugCallback);
 
 // Called from frontend code when it is ready
-void DLL_EXPORT TextEngine_OnStart();
+DLL_EXPORT void TextEngine_OnStart();
 
 // Called from frontend code on user input
-void DLL_EXPORT TextEngine_OnRead(const char* msg);
+DLL_EXPORT void TextEngine_OnRead(const char* msg);
