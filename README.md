@@ -42,13 +42,15 @@ Educational purposes at the first place. I want to improve common development sk
 - [ ] Shared library usage:
    - [x] Debug handlers
    - [ ] Web
-   - [ ] MacOS
+   - [x] MacOS
    - [x] Windows
    - [ ] Android
-   - [ ] iOS
+   - [x] iOS
 - [ ] Build pipeline:
    - [x] Pull foundation and copy to Staging
    - [ ] Append latest library and user code
    - [ ] Ready to build & run
    - [ ] Perform build and place it to Builds
    - [ ] Full build process
+   - [ ] iOS
+      - [ ] Build & run on device/simulator
