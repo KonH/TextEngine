@@ -4,6 +4,7 @@ using EngineBuilder.Commands.Android;
 using EngineBuilder.Commands.WindowsClassic;
 using EngineBuilder.Commands.MacOS;
 using EngineBuilder.Commands.iOS;
+using EngineBuilder.Commands.Web;
 
 namespace EngineBuilder.Commands {
 	class CommandFactory {
@@ -23,6 +24,7 @@ namespace EngineBuilder.Commands {
 			AddSpecificCommand<AppendCommand>(Configuration.AndroidTarget,        new AppendCommand_Android());
 			AddSpecificCommand<AppendCommand>(Configuration.MacOSTarget,          new AppendCommand_MacOS());
 			AddSpecificCommand<AppendCommand>(Configuration.iOSTarget,            new AppendCommand_iOS());
+			AddSpecificCommand<AppendCommand>(Configuration.WebTarget,            new AppendCommand_Web());
 
 			AddSpecificCommand<BuildCommand> (Configuration.WindowsClassicTarget, new BuildCommand_WindowsClassic());
 			AddSpecificCommand<BuildCommand> (Configuration.AndroidTarget,        new BuildCommand_Android());

@@ -97,16 +97,29 @@ namespace EngineBuilder {
 			}
 		}
 
+		public class WebConfiguration {
+			public WebConfiguration(Configuration config) {
+				var stagingRoot = Path.Combine(config.StagingDirectory, WebTarget);
+
+				config.ProjectTargetDirectories.Add(
+					WebTarget,
+					Path.Combine(stagingRoot, "TextEngine")
+				);
+			}
+		}
+
 		public const string WindowsClassicTarget = "WindowsClassic";
 		public const string AndroidTarget        = "Android";
 		public const string iOSTarget            = "iOS";
 		public const string MacOSTarget          = "MacOS";
+		public const string WebTarget            = "Web";
 
 		public List<string> Targets { get; } = new List<string> {
 			WindowsClassicTarget,
 			AndroidTarget,
 			iOSTarget,
 			MacOSTarget,
+			WebTarget,
 		};
 
 		public string ProjectDirectory    { get; } = "TextEngine";
@@ -120,12 +133,14 @@ namespace EngineBuilder {
 		public AndroidConfiguration Android { get; }
 		public iOSConfiguration     iOS     { get; }
 		public MacOSConfiguration   MacOS   { get; }
+		public WebConfiguration     Web     { get; }
 
 		public Configuration() {
 			Windows = new WindowsConfiguration(this);
 			Android = new AndroidConfiguration(this);
 			iOS     = new iOSConfiguration    (this);
 			MacOS   = new MacOSConfiguration  (this);
+			Web     = new WebConfiguration    (this);
 		}
 	}
 }
