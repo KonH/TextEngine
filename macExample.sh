@@ -1,1 +1,1 @@
-./builder.sh clean prepare append build -target=MacOS -configuration=Release
+./builder.sh clean prepare append build run -target=MacOS -configuration=Release
