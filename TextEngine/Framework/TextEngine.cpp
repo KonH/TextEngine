@@ -1,6 +1,7 @@
 #include <memory>
 
 #include "TextEngine.h"
+#include "TextEngine.Bridge.h"
 #include "../App/App.h"
 
 static std::unique_ptr<TextEngine::AppBase>   _appHandler(new TextEngineApp::App);
