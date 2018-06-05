@@ -58,8 +58,17 @@ namespace EngineBuilder {
 		}
 
 		public class iOSConfiguration {
+			public string AppDirectory     { get; }
+			public string ProjectFile      { get; } = "iOS.xcodeproj";
+			public string XcodeProjectPath { get; }
+			public string PbxProjectPath   { get; }
+			public string TargetName       { get; } = "iOS";
+
 			public iOSConfiguration(Configuration config) {
-				var stagingRoot = Path.Combine(config.StagingDirectory, iOSTarget);
+				var stagingRoot  = Path.Combine(config.StagingDirectory, iOSTarget);
+				AppDirectory     = stagingRoot;
+				XcodeProjectPath = Path.Combine(stagingRoot, ProjectFile);
+				PbxProjectPath   = Path.Combine(stagingRoot, ProjectFile, "project.pbxproj");
 
 				config.ProjectTargetDirectories.Add(
 					iOSTarget,
