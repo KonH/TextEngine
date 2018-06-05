@@ -1,22 +1,29 @@
 ﻿using System;
+using System.IO;
 using System.Diagnostics;
 using EngineBuilder.Commands;
 
 namespace EngineBuilder.Tools {
 	static class ProcessTools {
-		public static Process RunProcess(string fileName, string args) {
-			Console.WriteLine($"Run '{fileName}' with args: '{args}'");
-			var proc = Process.Start(fileName, args);
+		static Process RunProcess(string fileName, string args, string workingDir = "") {
+			var actualWorkingDir = string.IsNullOrEmpty(workingDir) ? Directory.GetCurrentDirectory() : workingDir;
+			Console.WriteLine($"Run '{fileName}' with args: '{args}' at '{actualWorkingDir}'");
+			var startInfo = new ProcessStartInfo {
+				FileName         = fileName,
+				Arguments        = args,
+				WorkingDirectory = workingDir
+			};
+			var proc = Process.Start(startInfo);
 			return proc;
 		}
 
-		public static Process RunProcessAndWait(string fileName, string args) {
-			var proc = RunProcess(fileName, args);
+		static Process RunProcessAndWait(string fileName, string args, string workingDir = "") {
+			var proc = RunProcess(fileName, args, workingDir);
 			proc.WaitForExit();
 			return proc;
 		}
 
-		public static void EnsureProcessSuccess(ICommand command, Process proc, string operationName) {
+		static void EnsureProcessSuccess(ICommand command, Process proc, string operationName) {
 			Console.WriteLine($"Process {operationName} exited with code '{proc.ExitCode}'");
 			var isSuccess = proc.ExitCode == 0;
 			if ( !isSuccess ) {
@@ -25,10 +32,11 @@ namespace EngineBuilder.Tools {
 		}
 		
 		public static void RunProcessAndEnsureSuccess(
-			ICommand command, string operationName, string fileName, string args
+			ICommand command, string operationName, string fileName, string args, string workingDir = ""
 		) {
-			var proc = RunProcessAndWait(fileName, args);
-			EnsureProcessSuccess(command, proc, operationName);
+			using ( var proc = RunProcessAndWait(fileName, args, workingDir) ) {
+				EnsureProcessSuccess(command, proc, operationName);
+			}
 		}
 	}
 }

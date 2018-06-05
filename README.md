@@ -44,7 +44,7 @@ Educational purposes at the first place. I want to improve common development sk
    - [ ] Web
    - [x] MacOS
    - [x] Windows
-   - [ ] Android
+   - [x] Android
    - [x] iOS
 - [ ] Build pipeline:
    - [x] Pull foundation and copy to Staging
@@ -54,3 +54,5 @@ Educational purposes at the first place. I want to improve common development sk
    - [ ] Full build process
    - [ ] iOS
       - [ ] Build & run on device/simulator
+   - [ ] Android
+      - [ ] Run on device

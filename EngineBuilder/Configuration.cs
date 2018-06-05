@@ -36,7 +36,6 @@ namespace EngineBuilder {
 		public class AndroidConfiguration {
 			public string AppDirectory    { get; }
 			public string BuildDirectory  { get; }
-			public string BuildFile       { get; } = "app-debug.apk";
 			public string ApkRunName      { get; } = "apk-runner";
 			public string ApkRunCommand   { get; } = "{0}";
 			public string CMakeVersion    { get; } = "3.4.1";
@@ -46,7 +45,7 @@ namespace EngineBuilder {
 			public AndroidConfiguration(Configuration config) {
 				var stagingRoot = Path.Combine(config.StagingDirectory, AndroidTarget);
 				AppDirectory    = Path.Combine(stagingRoot, "app");
-				BuildDirectory  = Path.Combine(AppDirectory, "build", "outputs", "apk", "debug");
+				BuildDirectory  = Path.Combine(AppDirectory, "build", "outputs", "apk");
 				CMakeFile       = Path.Combine(AppDirectory, "CMakeLists.txt");
 				CppAppDirectory = Path.Combine(AppDirectory, "src", "main", "cpp");
 

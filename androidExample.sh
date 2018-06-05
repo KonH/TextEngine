@@ -1,3 +1,2 @@
 clear
-./builder.sh clean prepare append -target=Android
-#build run -configuration=Release
+./builder.sh clean prepare append build -target=Android -configuration=Release
