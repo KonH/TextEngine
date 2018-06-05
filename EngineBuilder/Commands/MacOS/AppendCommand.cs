@@ -11,8 +11,8 @@ namespace EngineBuilder.Commands.MacOS {
 
 		void IntegrateXcodeProject(Configuration.MacOSConfiguration config) {
 			var project = new PBXProject();
-			Console.WriteLine($"Read project file from '{config.ProjectPath}'");
-			project.ReadFromFile(config.ProjectPath);
+			Console.WriteLine($"Read project file from '{config.PbxProjectPath}'");
+			project.ReadFromFile(config.PbxProjectPath);
 
 			var targetGuid = project.TargetGuidByName(config.TargetName);
 			Console.WriteLine($"Add files to build for target '{config.TargetName}' ('{targetGuid}')");
@@ -22,7 +22,7 @@ namespace EngineBuilder.Commands.MacOS {
 				Console.WriteLine($"Add file: '{file}' ('{fileGuid}')");
 				project.AddFileToBuild(targetGuid, fileGuid);
 			}
-			project.WriteToFile(config.ProjectPath);
+			project.WriteToFile(config.PbxProjectPath);
 		}
 	}
 }
