@@ -56,7 +56,7 @@ Educational purposes at the first place. I want to improve common development sk
    - [ ] Wrappers Safety
 - [ ] Platform issues:
    - [ ] Mac:
-      - Fix scrolling
+      - [ ] Fix scrolling
    - [ ] iOS:
       - [ ] Fix scrolling
       - [ ] Build & run on device/simulator
