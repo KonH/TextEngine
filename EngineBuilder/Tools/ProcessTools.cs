@@ -5,7 +5,7 @@ using EngineBuilder.Commands;
 
 namespace EngineBuilder.Tools {
 	static class ProcessTools {
-		static Process RunProcess(string fileName, string args, string workingDir = "") {
+		public static Process RunProcess(string fileName, string args, string workingDir = "") {
 			var actualWorkingDir = string.IsNullOrEmpty(workingDir) ? Directory.GetCurrentDirectory() : workingDir;
 			Console.WriteLine($"Run '{fileName}' with args: '{args}' at '{actualWorkingDir}'");
 			var startInfo = new ProcessStartInfo {

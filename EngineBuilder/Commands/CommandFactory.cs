@@ -33,6 +33,7 @@ namespace EngineBuilder.Commands {
 
 			AddSpecificCommand<RunCommand>(Configuration.WindowsClassicTarget, new RunCommand_WindowsClassic());
 			AddSpecificCommand<RunCommand>(Configuration.MacOSTarget,          new RunCommand_MacOS());
+			AddSpecificCommand<RunCommand>(Configuration.WebTarget,            new RunCommand_Web());
 		}
 
 		void AddSpecificCommand<T>(string target, ICommand cmd) {

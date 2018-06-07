@@ -49,7 +49,7 @@ Educational purposes at the first place. I want to improve common development sk
    - [x] Pull foundation and copy to Staging
    - [x] Append latest library and user code
    - [x] Ready to build & run
-   - [ ] Perform build and place it to Builds
+   - [x] Perform build and place it to Builds
    - [ ] Full build process
 - [ ] Platform issues:
    - [ ] Mac:
@@ -60,4 +60,5 @@ Educational purposes at the first place. I want to improve common development sk
    - [ ] Android:
       - [ ] Run on device
    - [ ] Web:
-      - [ ] Run web server
+      - [x] Run web server
+      - [ ] Properly kill python process
