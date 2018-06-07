@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using EngineBuilder.Tools;
 
 namespace EngineBuilder.Commands.Web {
@@ -18,6 +19,7 @@ namespace EngineBuilder.Commands.Web {
 
 			var workDir = Path.Combine(Directory.GetCurrentDirectory(), config.StagingDirectory, Configuration.WebTarget);
 			var buildArgs = string.Join(" ", GetFilesToBuild(workDir));
+			buildArgs += " -s EXPORTED_FUNCTIONS=[" + string.Join(",", config.Web.ExportedFuncs.Select(s => $"\"_{s}\"")) + "]" + " -s ASSERTIONS=2";
 			Console.WriteLine($"Start Emscripten build with args: '{buildArgs}'");
 			ProcessTools.RunProcessAndEnsureSuccess(this, "Emscripten Build", config.Web.EmccPath, buildArgs, workDir);
 		}

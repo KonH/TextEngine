@@ -2,7 +2,7 @@
 
 #if defined (_MSC_VER )
 	#define DLL_EXPORT extern "C" _declspec(dllexport)
-#elif defined ( __clang__ )
+#elif defined ( __APPLE__ )
 	#define DLL_EXPORT
 #else
 	#define DLL_EXPORT extern "C"

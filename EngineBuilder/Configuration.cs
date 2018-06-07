@@ -98,7 +98,8 @@ namespace EngineBuilder {
 		}
 
 		public class WebConfiguration {
-			public string EmccPath { get; } = @"D:\Work\Programming\Web\emsdk\emscripten\1.38.5\emcc.bat";
+			public string   EmccPath      { get; } = @"D:\Work\Programming\Web\emsdk\emscripten\1.38.5\emcc.bat";
+			public string[] ExportedFuncs { get; } = { "TextEngine_JS_Init", "TextEngine_OnStart", "TextEngine_OnRead" };
 
 			public WebConfiguration(Configuration config) {
 				var stagingRoot = Path.Combine(config.StagingDirectory, WebTarget);

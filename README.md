@@ -31,28 +31,33 @@ Educational purposes at the first place. I want to improve common development sk
 
 ## TODO
 
-- [ ] Make foundation frontend apps:
+- [x] Make foundation frontend apps:
    - [x] Web
    - [x] MacOS
    - [x] Windows
    - [x] Android
    - [x] iOS
-- [ ] Fix scrolling on iOS/Mac
 - [x] User code usage?
-- [ ] Shared library usage:
+- [x] Shared library usage:
    - [x] Debug handlers
-   - [ ] Web
+   - [x] Web
    - [x] MacOS
    - [x] Windows
    - [x] Android
    - [x] iOS
 - [ ] Build pipeline:
    - [x] Pull foundation and copy to Staging
-   - [ ] Append latest library and user code
-   - [ ] Ready to build & run
+   - [x] Append latest library and user code
+   - [x] Ready to build & run
    - [ ] Perform build and place it to Builds
    - [ ] Full build process
-   - [ ] iOS
+- [ ] Platform issues:
+   - [ ] Mac:
+      - Fix scrolling
+   - [ ] iOS:
+      - [ ] Fix scrolling
       - [ ] Build & run on device/simulator
-   - [ ] Android
+   - [ ] Android:
       - [ ] Run on device
+   - [ ] Web:
+      - [ ] Run web server
