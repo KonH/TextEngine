@@ -51,6 +51,9 @@ Educational purposes at the first place. I want to improve common development sk
    - [x] Ready to build & run
    - [x] Perform build and place it to Builds
    - [ ] Full build process
+- [ ] Common issues:
+   - [ ] Shared Library Safety
+   - [ ] Wrappers Safety
 - [ ] Platform issues:
    - [ ] Mac:
       - Fix scrolling
