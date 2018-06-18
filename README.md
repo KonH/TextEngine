@@ -52,7 +52,7 @@ Educational purposes at the first place. I want to improve common development sk
    - [x] Perform build and place it to Builds
    - [ ] Full build process
 - [ ] Common issues:
-   - [ ] Shared Library Safety
+   - [x] Shared Library Safety
    - [ ] Wrappers Safety
 - [ ] Platform issues:
    - [ ] Mac:

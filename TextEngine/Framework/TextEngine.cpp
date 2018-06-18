@@ -18,18 +18,26 @@ void TextEngine_OnStart() {
 }
 
 void TextEngine_OnRead(const char* msg) {
-	std::string str(msg);
-	_appHandler->Debug("TextEngine.OnRead: '" + str + "'");
-	_appHandler->OnRead(str);
+	if (msg) {
+		std::string str(msg);
+		_appHandler->Debug("TextEngine.OnRead: '" + str + "'");
+		_appHandler->OnRead(str);
+	}
 }
 
 void TextEngine_Write(const char* msg) {
-	_appHandler->Debug("TextEngine.Write: '" + std::string(msg) + "'");
-	_internals->WriteCallback(msg);
+	if (msg) {
+		_appHandler->Debug("TextEngine.Write: '" + std::string(msg) + "'");
+		if (_internals->WriteCallback) {
+			_internals->WriteCallback(msg);
+		}
+	}
 }
 
 void TextEngine_Debug(const char* msg) {
-	_internals->DebugCallback(msg);
+	if (msg && _internals->DebugCallback) {
+		_internals->DebugCallback(msg);
+	}
 }
 
 namespace TextEngine {
