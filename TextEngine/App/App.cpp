@@ -3,7 +3,6 @@
 using namespace TextEngineApp;
 
 void App::OnStart() {
-	std::cout << "App.OnStart" << std::endl;
 }
 
 void App::OnRead(std::string msg) {
